@@ -1,0 +1,11 @@
+future==0.18.2
+
+onnx
+torch
+pydot
+networkx
+tensorflow==1.14
+Cython
+numpy==1.18.5
+Pillow
+opencv-python>=4.1.2

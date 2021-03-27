@@ -1,0 +1,12 @@
+language: bash
+
+services:
+  - docker
+
+before_install:
+- docker pull hdgerin/cmake-fullpython:bionic-latest
+- docker run -d -p 127.0.0.1:80:4567 hdgerin/cmake-fullpython:bionic-latest /bin/sh -c "echo pwd;"
+- docker ps -a
+- docker run hdgerin/cmake-fullpython:bionic-latest  /bin/sh -c "echo pwd"
+
+script:  docker run -it -v $(pwd):/work    hdgerin/cmake-fullpython:bionic-latest /work/testHelloWorld.sh

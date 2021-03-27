@@ -1,1 +1,7 @@
-testbuild/
+build/
+install/
+**/build
+**/install
+cmake-3.12.1/
+Python-3.7.10/
+*.egg-*

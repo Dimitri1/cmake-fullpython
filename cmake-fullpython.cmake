@@ -21,17 +21,6 @@ if (NOT ${PYTHON_VERS} VERSION_GREATER_EQUAL ${PYTHON_MIN_VERS})
 	message(FATAL_ERROR "Python version ${PYTHON_VERS} is not supported, the minimal required version is ${PYTHON_MIN_VERS}")
 endif()
 
-# use update alernative to install python 3.6 as /usr/bin/python
-# in your sytem
-# This install depends on your distribution
-# It is probably not required for Ubuntu 18.04
-# For ubuntu 16.04, you can use this procedure below :
-# # python 3.6 is required in ubuntu Xenial 16.04
-# sudo add-apt-repository ppa:deadsnakes/ppa
-# sudo apt-get update
-# sudo apt-get install python3.6
-# sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.6 2
-
 # use virtualenv from python package
 set(VIRTUALENV ${Python_EXECUTABLE} -m venv)
 
@@ -46,10 +35,6 @@ set(EASY_INSTALL ${venv_dir}/venv-${name}/bin/easy_install)
 add_custom_target( gen-venv-${name} ALL
                    COMMAND cd ${venv_dir} && ${VIRTUALENV} venv-${name}
 )
-
-# WORKAROUND INTRALLING TENSORFFLOW > 1.11 has the side effect of removing
-# EASY_INSTALL. This cause this script to fails the second time.
-# So we check is EASY_INSTALL EXISTS before using it.
 
 if(EXISTS ${EASY_INSTALL})
 	# updating pip
@@ -128,10 +113,8 @@ endforeach(SETUP)
 
 endif()
 
-
-# vsora cpython package installation
-# cpython package is a python module that has
-# beed writen in C++, through PYBIND11 library
+# cpython package type is are python modules that has
+# beed writen in C++ and compiler with PYBIND11 stack
 # This module consist of a .so library.
 # This .so file must be installed into the 
 # virtualenv site-package for binding purposes.
@@ -143,10 +126,7 @@ add_custom_target(install-venv-${name}-requirements ALL
 
 ## env_file contains environement informations
 ## here we configure and install env_file into
-## vsora package dir as a python module.
-## vsora/__init__.py file import env_file 
-## module while starting up to get all the 
-## necessary env variables into the vsora namespace
+## python site-packages dir as a python module.
 configure_file (${env_file} ${env_file})
 add_custom_target(env-file-install ALL
 	COMMAND ${CMAKE_COMMAND} -E copy ${env_file} ${SITE_PACKAGES_DIR}/${env_file})
