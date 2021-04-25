@@ -47,6 +47,15 @@ that belongs to the folowing diagram.
 git clone https://github.com/Dimitri1/cmake-fullpython
 ```
 
+- Build examples locally
+
+```bash
+cd cmake-fullpython
+
+# eg : build the example/aiMachine on xenial-latest
+docker run -v $(pwd):/work   hdgerin/cmake-fullpython:xenial-latest   bash -c "mkdir -p /tmp/build /tmp/install && cd /tmp/build && cmake -DINSTALL=/tmp/install  /work/examples/aiMachine/ && make && ctest -V"
+```
+
 - Configure system:
 
 ```bash
