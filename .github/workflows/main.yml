@@ -16,10 +16,10 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  bionic:
+  bionic-python37:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container: hdgerin/cmake-fullpython:bionic-latest
+    container: hdgerin/cmake-fullpython:bionic-python3.7
   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -34,10 +34,10 @@ jobs:
         run: bash -c "rm -rf /tmp/build/ /tmp/install ; mkdir /tmp/build /tmp/install && cd /tmp/build && cmake -DINSTALL=/tmp/install  ${PWD}/examples/aiMachine/ && make && ctest -V"
   
   # This workflow contains a single job called "build"
-  xenial:
+  xenial-python37:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container: hdgerin/cmake-fullpython:xenial-latest
+    container: hdgerin/cmake-fullpython:bionic-python3.7
   
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
